@@ -38,9 +38,14 @@ This project provides an automated setup for AWS IoT Fleet Provisioning for STM3
 On a PC with AWS CLI installed, clone this repository:
 
 ```bash
-git clone https://github.com/stm32-hotspot/FleetProvisioning
-cd FleetProvisioning
+git clone https://github.com/stm32-hotspot/STM32_FleetProvisioning
+cd STM32_FleetProvisioning
 ```
+### 3. Clone stm32u585_aws_iot_reference
+```bash
+git clone https://github.com/SlimJallouli/aware_demo.git --recurse-submodules
+```
+
 ### 2. Generate a CSR
 use the gen_csr.sh to generate private-key.pem,  public-key.pem and a csr.pem file
 
@@ -67,17 +72,16 @@ createFleetProvisioningStack.sh reads the STACK_NAME from config.json
 > Note: AWS CloudFormation Stack template can be modified in `template.yaml` 
 
 ### 7. Rebuild the project
-open **B-U585I-IOT02A\Common\app\FleetProvisioning\fleet_provisioning_config.h** 
-
-replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name
-
-rebuild, flash and run the project
+- open the aware_demo with STM32CubeIDE
+- open **B-U585I-IOT02A\Common\app\FleetProvisioning\fleet_provisioning_config.h** 
+- replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name
+- rebuild, flash and run the project
 
 ### 8. Upload the certificate to STM32 
-open claim.pem.crt on text editor
+- open claim.pem.crt on text editor
 
-construct the command as following and then se serial terminal to send it to STM32
-
+- construct the command as following and then se serial terminal to send it to STM32
+```
 pki import key fleetprov_claim_cert
 -----BEGIN CERTIFICATE-----
 MIIEpAIBAAKCAQEA1WUKouJ2A6kTUkFKTyydStQ78zSsYMZK13SbnkcyPl8e5tiU
@@ -88,12 +92,12 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END CERTIFICATE-----
-
+```
 ### 9. Upload the private key on to STM32
-open private-key.pem on text editor
+- open private-key.pem on text editor
 
-construct the command as following and then se serial terminal to send it to STM32
-
+- construct the command as following and then se serial terminal to send it to STM32
+```
 pki import key fleetprov_claim_key
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA1WUKouJ2A6kTUkFKTyydStQ78zSsYMZK13SbnkcyPl8e5tiU
@@ -104,7 +108,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END RSA PRIVATE KEY-----
-
+```
 ### Set Config
 
 ```
