@@ -41,7 +41,6 @@ fi
 # List all principals (certificates) attached to the Thing
 PRINCIPALS=$(aws iot list-thing-principals --thing-name "${THING_NAME}" --output text --query 'principals')
 
-
 if [ -z "$PRINCIPALS" ]; then
     echo "No principals (certificates) attached to the Thing '${THING_NAME}'."
 else
@@ -82,9 +81,5 @@ fi
 # Delete the IoT Thing
 echo "Deleting IoT Thing: ${THING_NAME}"
 aws iot delete-thing --thing-name "${THING_NAME}"
-
-echo "Deleting GreenGrass core V2 '$THING_NAME'"
-aws greengrassv2 delete-core-device --core-device-thing-name ${THING_NAME}
-echo "Deleted GreenGrass core V2 '$THING_NAME'"
 
 echo "Cleanup completed for IoT Thing: ${THING_NAME}"
