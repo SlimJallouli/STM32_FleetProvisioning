@@ -70,13 +70,20 @@ mkdir -p $CERT_DIR
 
 # Step 1: Create the certificate and keys
 echo "Creating certificate and keys..."
-CERT_ARN=$(aws iot create-keys-and-certificate \
+CERT_ARN=$(aws iot create-certificate-from-csr \
+  --certificate-signing-request file://csr.pem \
   --certificate-pem-outfile "$CERT_PEM_OUTFILE" \
-  --public-key-outfile "$PUBLIC_KEY_OUTFILE" \
-  --private-key-outfile "$PRIVATE_KEY_OUTFILE" \
   --set-as-active \
   --query 'certificateArn' \
   --output text)
+
+# CERT_ARN=$(aws iot create-keys-and-certificate \
+#   --certificate-pem-outfile "$CERT_PEM_OUTFILE" \
+#   --public-key-outfile "$PUBLIC_KEY_OUTFILE" \
+#   --private-key-outfile "$PRIVATE_KEY_OUTFILE" \
+#   --set-as-active \
+#   --query 'certificateArn' \
+#   --output text)
 
 if [ -z "$CERT_ARN" ]; then
     echo "Error: Failed to create certificate."
