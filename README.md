@@ -44,27 +44,36 @@ cd FleetProvisioning
 ### 2. Generate a CSR
 use the gen_csr.sh to generate private-key.pem,  public-key.pem and a csr.pem file
 
-### 3. Create the CloudFormation Stack
+### 3. Update config.json
+open config.json with a text editor and update:
+- StackName
+- ThingGroupName
+- provisioningTemplate
+
+### 4. Generate Required Configuration
+Run `updateConfig.sh` to parse `config.json` and populate `template.yaml` with required AWS endpoint and configuration data:
+
+```bash
+./updateConfig.sh
+```
+### 6. Create the CloudFormation Stack
 Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Provisioning by creating a CloudFormation stack, generating claim certificates, and attaching the necessary IoT policies.
 
+createFleetProvisioningStack.sh reads the STACK_NAME from config.json
+
 ```bash
-./createFleetProvisioningStack.sh -s <STACK_NAME>
+./createFleetProvisioningStack.sh
 ```
 > Note: AWS CloudFormation Stack template can be modified in `template.yaml` 
-### 4. Generate Required Configuration
-Run `updateConfig.sh` to parse `template.yaml` and populate `config.json` with required AWS endpoint and configuration data:
 
-```bash
-./updateConfig.sh -g <THING_GROUP_NAME>
-```
+### 7. Rebuild the project
+open **B-U585I-IOT02A\Common\app\FleetProvisioning\fleet_provisioning_config.h** 
 
-Replace `<THING_GROUP_NAME>` with the desired name for your Thing Group. This step automatically updates `config.json` with:
-   - AWS Region
-   - Thing Group Name
-   - IoT Credential and Data endpoints
-   - Role Alias and Provisioning Template values from `template.yaml`
+replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name
 
-### 5. Upload the certificate to STM32 
+rebuild, flash and run the project
+
+### 8. Upload the certificate to STM32 
 open claim.pem.crt on text editor
 
 construct the command as following and then se serial terminal to send it to STM32
@@ -80,7 +89,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END CERTIFICATE-----
 
-### 6. Upload the private key on to STM32
+### 9. Upload the private key on to STM32
 open private-key.pem on text editor
 
 construct the command as following and then se serial terminal to send it to STM32
@@ -96,3 +105,12 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END RSA PRIVATE KEY-----
 
+### Set Config
+
+```
+conf set provision_state 0
+conf set wifi_ssid <Your Wi-Fi SSID>
+conf set wifi_credential <Your Wi-Fi Password>
+conf set thing_group_name <Yout ThingGroupName>
+conf commit
+```
