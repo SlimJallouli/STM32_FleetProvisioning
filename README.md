@@ -151,12 +151,11 @@ AwXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4r
 ```
 ### 5.8. Set Config
 - Use a serial terminal to:
-   * Upluad the Fleet Provisioning private key
-   * Upluad the Fleet Provisioning certificate
    * Set Wi-Fi SSID
    * Wi-Fi Password
    * Set AWS endpoint
-   * Set MQTT Port.
+   * Set MQTT Port
+   * Set the Thnig Group Name
 
 >Not: You don't need to set the thing_name as the Fleet Provisioning firware running on STM32 will generate a unique thing_name per device. It uses the device Unique ID to generate the thing_name.
 
