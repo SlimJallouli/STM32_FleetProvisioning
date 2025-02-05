@@ -19,23 +19,16 @@
 # Define the YAML file
 TEMPLATE_FILE="template.yaml"
 
-# Function to display help
-usage() {
-    echo "Usage: $0 -s STACK_NAME"
-    exit 1
-}
+# Read provisioningTemplateName from config.json
+CONFIG_FILE="config.json"
+STACK_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
 
-# Parse command line arguments
-while getopts ":s:" opt; do
-    case ${opt} in
-        s )
-            STACK_NAME=$OPTARG
-            ;;
-        \? )
-            usage
-            ;;
-    esac
-done
+if [ -z "$STACK_NAME" ]; then
+    echo "Error: provisioningTemplateName not found in $CONFIG_FILE"
+    exit 1
+fi
+
+echo "Using STACK_NAME: $STACK_NAME"
 
 # Check that the stack name argument is provided
 if [ -z "$STACK_NAME" ]; then
@@ -45,8 +38,7 @@ fi
 # Define output file paths
 CERT_DIR="claim-certs"
 CERT_PEM_OUTFILE="$CERT_DIR/claim.pem.crt"
-PUBLIC_KEY_OUTFILE="$CERT_DIR/claim.public.pem.key"
-PRIVATE_KEY_OUTFILE="$CERT_DIR/claim.private.pem.key"
+CSR_FILE="$CERT_DIR/csr.pem
 
 # Create the CloudFormation stack
 echo "Creating CloudFormation stack: $STACK_NAME..."
@@ -71,19 +63,11 @@ mkdir -p $CERT_DIR
 # Step 1: Create the certificate and keys
 echo "Creating certificate and keys..."
 CERT_ARN=$(aws iot create-certificate-from-csr \
-  --certificate-signing-request file://csr.pem \
+  --certificate-signing-request file://$CSR_FILE \
   --certificate-pem-outfile "$CERT_PEM_OUTFILE" \
   --set-as-active \
   --query 'certificateArn' \
   --output text)
-
-# CERT_ARN=$(aws iot create-keys-and-certificate \
-#   --certificate-pem-outfile "$CERT_PEM_OUTFILE" \
-#   --public-key-outfile "$PUBLIC_KEY_OUTFILE" \
-#   --private-key-outfile "$PRIVATE_KEY_OUTFILE" \
-#   --set-as-active \
-#   --query 'certificateArn' \
-#   --output text)
 
 if [ -z "$CERT_ARN" ]; then
     echo "Error: Failed to create certificate."
