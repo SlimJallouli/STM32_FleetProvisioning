@@ -11,6 +11,8 @@ Use this [link](https://docs.aws.amazon.com/iot/latest/developerguide/provision-
 
 This example use [Provisioning by claim](https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#claim-based)
 
+This is an adaptation of the FreeRTOS [AWS IoT Fleet Provisioning Demo
+](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo)
 
 ## 2. Fleet Provisioning Flow
 >Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration. No other actions are needed on AWS side too.
