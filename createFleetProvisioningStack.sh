@@ -18,10 +18,17 @@
 # Define the CloudFormation stack name
 # Define the YAML file
 TEMPLATE_FILE="template.yaml"
+CONFIG_FILE="config.json"
+
+# Define output file paths
+CERT_DIR="claim-certs"
+CERT_PEM_OUTFILE="$CERT_DIR/claim.pem.crt"
+CSR_FILE="$CERT_DIR/csr.pem"
 
 # Read provisioningTemplateName from config.json
-CONFIG_FILE="config.json"
-STACK_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
+STACK_NAME=$(grep -oP '(?<="StackName": ")[^"]*' "$CONFIG_FILE")
+GROUP_NAME=$(grep -oP '(?<="ThingGroupName": ")[^"]*' "$CONFIG_FILE")
+PROVISION_TEMPLATE_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
 
 if [ -z "$STACK_NAME" ]; then
     echo "Error: provisioningTemplateName not found in $CONFIG_FILE"
@@ -35,11 +42,13 @@ if [ -z "$STACK_NAME" ]; then
     usage
 fi
 
-# Define output file paths
-CERT_DIR="claim-certs"
-CERT_PEM_OUTFILE="$CERT_DIR/claim.pem.crt"
-CSR_FILE="$CERT_DIR/csr.pem
+# Update the Default value in template.yaml
+TEMPLATE_FILE="template.yaml"
+sed -i.bak "s/Default: 'DEFULT_FP_TemplateName'/Default: '$PROVISION_TEMPLATE_NAME'/" "$TEMPLATE_FILE"
 
+echo "Updated DEFULT_FP_TemplateName value to $PROVISION_TEMPLATE_NAME in $TEMPLATE_FILE"
+
+exit 0
 # Create the CloudFormation stack
 echo "Creating CloudFormation stack: $STACK_NAME..."
 aws cloudformation create-stack --stack-name $STACK_NAME --template-body file://$TEMPLATE_FILE --capabilities CAPABILITY_NAMED_IAM
@@ -99,6 +108,4 @@ else
 fi
 
 echo "Certificate and policy setup completed."
-
-
 

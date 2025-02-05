@@ -1,5 +1,5 @@
 {
+  "StackName": "STM32U5-FP-Stack",
   "provisioningTemplateName": "STM32U5_FP_Template",
   "ThingGroupName": "STM32U5_ThingGroup"
 }
-  
