@@ -18,6 +18,7 @@ The main differences vs the [AWS IoT Fleet Provisioning Demo
 ](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo):
 - It runs on STM32
 - Automate the process using scripts and CloudFormation to create the required AWS resources. This significantly reduces time and minimizes errors.
+- Devices are automatically register to a ThingGroup in AWS
 
 ## 2. Fleet Provisioning Flow
 >Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration. No other actions are needed on AWS side too.
@@ -124,7 +125,7 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 ### 5.5. Rebuild the project
 - open the `aware_demo` with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
-- replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name as you set it up in `config.json` file
+- replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name as you set it up in `config.json` file. This is important or your device will not be able to register itself with AWS.
 - rebuild, flash and run the project
 
 ![alt text](<Screenshot 2025-02-05 093504.png>)
