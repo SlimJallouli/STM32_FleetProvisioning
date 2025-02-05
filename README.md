@@ -36,11 +36,13 @@ The User will need to:
 When the STM32 device restarts, it will:
 1. Connect to Wi-Fi.
 2. Use the Fleet Provisioning certificate to establish a connection with AWS.
-3. Generate a Certificate Signing Request (CSR) and send it to AWS.
-4. AWS will respond with a new certificate.
-5. STM32 save the newly received certificate in its internal flash memory.
-6. Send a Register request to AWS.
-7. STM32 reset after receiving the registration confirmation from AWS.
+3. Generate a public-private key-pair
+4. Generate a Certificate Signing Request (CSR) and send it to AWS.
+5. AWS will respond with a new certificate.
+6. STM32 save the newly received certificate in its internal Flash memory.
+7. Generate a thing_name based on the device Unique ID (UID)
+8. Send a Register request to AWS.
+9. STM32 reset after receiving the registration confirmation from AWS.
 
 When the STM32 device reboots, it will use the new certificate to connect to AWS IoT Core and begin running the application.
 
