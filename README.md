@@ -13,7 +13,7 @@ This example use [Provisioning by claim](https://docs.aws.amazon.com/iot/latest/
 
 
 ## 2. Fleet Provisioning Flow
->Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration.
+>Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration. No other actions are needed on AWS side too.
 
 The User will need to:
 1. Use openSSL to generate a private key and CSR file
