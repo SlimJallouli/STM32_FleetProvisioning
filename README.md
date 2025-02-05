@@ -71,7 +71,7 @@ Description of the files on this repository
 ## 5. Setup Steps
 
 ### 5.1. Clone the Repositories
-Clone these two repositors:
+Clone these two repositories:
 
 ```bash
 git clone https://github.com/SlimJallouli/aware_demo.git --recurse-submodules
@@ -85,7 +85,7 @@ git clone https://github.com/SlimJallouli/STM32_FleetProvisioning
 cd STM32_FleetProvisioning
 ```
 
-use the gen_csr.sh to generate private-key.pem,  public-key.pem and a csr.pem file
+use the `gen_csr.sh` to generate private-key.pem,  public-key.pem and a csr.pem file
 
 ```bash
 ./gen_csr.sh
@@ -102,13 +102,11 @@ open `config.json` with a text editor and update:
 ### 5.4. Create the CloudFormation Stack
 Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Provisioning by creating a CloudFormation stack, generating claim certificates, and attaching the necessary IoT policies.
 
-`createFleetProvisioningStack.sh` reads the `STACK_NAME` and `PROVISION_TEMPLATE_NAME` from `config.json`, use the `claim-certs/csr.pem` file to generate the claim certificate and use the `template.yaml` to for the CloudFormation
+`createFleetProvisioningStack.sh` reads the `STACK_NAME` and `PROVISION_TEMPLATE_NAME` from `config.json`, use the `claim-certs/csr.pem` file to generate the claim certificate and use the `template.yaml` for the CloudFormation
 
 ```bash
 ./createFleetProvisioningStack.sh
 ```
-> Note: AWS CloudFormation Stack template can be modified in `template.yaml` 
-
 ### 5.5. Rebuild the project
 - open the `aware_demo` with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
