@@ -82,7 +82,7 @@ Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Prov
 
 - construct the command as following and then use serial terminal to send it to STM32
 ```
-pki import key fleetprov_claim_cert
+pki import cert fleetprov_claim_cert
 -----BEGIN CERTIFICATE-----
 MIIEpAIBAAKCAQEA1WUKouJ2A6kTUkFKTyydStQ78zSsYMZK13SbnkcyPl8e5tiU
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
