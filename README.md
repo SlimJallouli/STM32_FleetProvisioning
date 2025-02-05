@@ -74,8 +74,10 @@ Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Prov
 ### 4.5. Rebuild the project
 - open the `aware_demo` with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
-- replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name
+- replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name as you set it up in `config.json` file
 - rebuild, flash and run the project
+
+![alt text](<Screenshot 2025-02-05 093504.png>)
 
 ### 4.6. Upload the certificate to STM32 
 - open `claim-certs\claim.pem.crt` on text editor
