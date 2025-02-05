@@ -137,7 +137,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END CERTIFICATE-----
 ```
-### 5.7. Upload the private key on to STM32
+### 5.7. Upload the private key to STM32
 - open `claim-certs\private-key.pem` on text editor
 
 - construct the command as following and then use serial terminal to send it to STM32
