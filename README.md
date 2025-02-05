@@ -96,7 +96,7 @@ PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 ### 4.7. Upload the private key on to STM32
 - open `claim-certs\private-key.pem` on text editor
 
-- construct the command as following and then se serial terminal to send it to STM32
+- construct the command as following and then use serial terminal to send it to STM32
 ```
 pki import key fleetprov_claim_key
 -----BEGIN EC PRIVATE KEY-----
@@ -111,7 +111,7 @@ AwXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4r
 conf set provision_state 0
 conf set wifi_ssid <Your Wi-Fi SSID>
 conf set wifi_credential <Your Wi-Fi Password>
-conf set thing_group_name <Yout ThingGroupName>
+conf set thing_group_name <Your ThingGroupName>
 conf commit
 reset
 ```
