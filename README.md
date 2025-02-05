@@ -102,7 +102,9 @@ open `config.json` with a text editor and update:
 ### 5.4. Create the CloudFormation Stack
 Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Provisioning by creating a CloudFormation stack, generating claim certificates, and attaching the necessary IoT policies.
 
-`createFleetProvisioningStack.sh` reads the `STACK_NAME` and `PROVISION_TEMPLATE_NAME` from `config.json`, use the `claim-certs/csr.pem` file to generate the claim certificate and use the `template.yaml` for the CloudFormation
+`createFleetProvisioningStack.sh` reads the `STACK_NAME` and `PROVISION_TEMPLATE_NAME` from `config.json`, use the `claim-certs/csr.pem` file to generate the claim certificate and use the `template.yaml` to create the Fleet Provisioning template using CloudFormation
+
+The claim certificate is saved at `claim-certs\claim.pem.crt`
 
 ```bash
 ./createFleetProvisioningStack.sh
