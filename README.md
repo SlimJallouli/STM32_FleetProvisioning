@@ -12,10 +12,19 @@ Use this [link](https://docs.aws.amazon.com/iot/latest/developerguide/provision-
 This example use [Provisioning by claim](https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#claim-based)
 
 This is an adaptation of the FreeRTOS [AWS IoT Fleet Provisioning Demo
-](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo)
+](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo). 
+
+The main differences vs the [AWS IoT Fleet Provisioning Demo
+](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo):
+- It runs on STM32
+- Automate the process using scripts and CloudFormation to create the required AWS resources. This significantly reduces time and minimizes errors.
 
 ## 2. Fleet Provisioning Flow
 >Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration. No other actions are needed on AWS side too.
+
+> OpenSSL is used to generate the CSR to ensure that AWS generates a claim certificate compatible with the firmware running on the STM32.
+
+>A single binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices.
 
 The User will need to:
 1. Use openSSL to generate a private key and CSR file
@@ -27,24 +36,23 @@ The User will need to:
    * Upload the Fleet Provisioning private key
    * Upload the Fleet Provisioning certificate
    * Set Wi-Fi SSID
-   * Wi-Fi Password
+   * Set Wi-Fi Password
    * Set AWS endpoint
-   * Set and MQTT Port
-
->A single binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices.
+   * Set MQTT Port
+   * Set the ThingGroup Name
 
 When the STM32 device restarts, it will:
 1. Connect to Wi-Fi.
 2. Use the Fleet Provisioning certificate to establish a connection with AWS.
-3. Generate a public-private key-pair
-4. Generate a Certificate Signing Request (CSR) and send it to AWS.
-5. AWS will respond with a new certificate.
-6. STM32 save the newly received certificate in its internal Flash memory.
-7. Generate a thing_name based on the device Unique ID (UID)
-8. Send a Register request to AWS.
-9. STM32 reset after receiving the registration confirmation from AWS.
+3. Generate a `thing_name` based on the device's Unique ID (UID) and save it to internal flash memory.
+4. Generate a public-private key pair and save them to internal flash memory.
+5. Generate a Certificate Signing Request (CSR) and send it to AWS.
+6. Receive a new certificate from AWS.
+7. Save the newly received certificate to internal flash memory.
+8. Send a registration request to AWS.
+9. Reset the STM32 after receiving registration confirmation from AWS.
 
-When the STM32 device reboots, it will use the new certificate to connect to AWS IoT Core and begin running the application.
+Upon reboot, the STM32 device will use the new certificate to connect to AWS IoT Core and start running the application.
 
 ## 3. Prerequisites
 - **[B-U585I-IOT02A](https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html)**
@@ -152,10 +160,10 @@ AwXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4r
 ### 5.8. Set Config
 - Use a serial terminal to:
    * Set Wi-Fi SSID
-   * Wi-Fi Password
+   * Set Wi-Fi Password
    * Set AWS endpoint
    * Set MQTT Port
-   * Set the Thnig Group Name
+   * Set the ThingGroup Name
 
 >Not: You don't need to set the thing_name as the Fleet Provisioning firware running on STM32 will generate a unique thing_name per device. It uses the device Unique ID to generate the thing_name.
 
