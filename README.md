@@ -21,11 +21,11 @@ The main differences vs the [AWS IoT Fleet Provisioning Demo
 - Devices are automatically register to a ThingGroup in AWS
 
 ## 2. Fleet Provisioning Flow
->Note: This process is done only once and all the IoT devices can use the same firmware to connect to AWS without any further configuration. No other actions are needed on AWS side too.
+>Note: This process is done only once and all the IoT devices can use the same firmware and claim certificate to autoregister register and connect to AWS. 
 
-> OpenSSL is used to generate the CSR to ensure that AWS generates a claim certificate compatible with the firmware running on the STM32.
+> OpenSSL is used to generate the CSR to ensure that AWS generates a claim certificate compatible with the firmware running on STM32.
 
->A single binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices.
+>A binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices.
 
 The User will need to:
 1. Use openSSL to generate a private key and CSR file
