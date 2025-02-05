@@ -49,6 +49,12 @@ git clone https://github.com/SlimJallouli/aware_demo.git --recurse-submodules
 ### 2. Generate a CSR
 use the gen_csr.sh to generate private-key.pem,  public-key.pem and a csr.pem file
 
+```bash
+./gen_csr.sh
+```
+
+this will create 
+
 ### 3. Update config.json
 open config.json with a text editor and update:
 - StackName
