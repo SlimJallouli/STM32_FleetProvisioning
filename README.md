@@ -29,7 +29,7 @@ The User will need to:
    * Set AWS endpoint
    * Set and MQTT Port
 
-I single binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices. This is the main advantage of using FleetProvision over other AWS Provisioning methods
+>A single binay that contains all the proper configuration can be buit too. Means, a single binary can be used for all the devices.
 
 When the STM32 device restarts, it will:
 1. Connect to Wi-Fi.
