@@ -1,5 +1,14 @@
 {
   "StackName": "STM32U5-FP-Stack",
   "provisioningTemplateName": "STM32U5_FP_Template",
-  "ThingGroupName": "STM32U5_ThingGroup"
+  "ThingGroupName": "STM32U5_ThingGroup",
+  "mqtt_endpoint": "abcdefjhtvew8t-ats.iot.us-west-2.amazonaws.com",
+  "mqtt_port": 8883,
+  "provision_state": 0,
+  "wifi_ssid": "JSEC",
+  "wifi_credential": "STM32F103RBT6",
+  "thing_group_name": "Slim_Thing_Group",
+  "portName": "COM7",
+  "certificateFile": "claim-certs\\claim.pem.crt",
+  "privateKeyFile": "claim-certs\\private-key.pem"
 }
