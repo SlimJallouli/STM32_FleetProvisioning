@@ -48,7 +48,6 @@ sed -i.bak "s/Default: 'DEFULT_FP_TemplateName'/Default: '$PROVISION_TEMPLATE_NA
 
 echo "Updated DEFULT_FP_TemplateName value to $PROVISION_TEMPLATE_NAME in $TEMPLATE_FILE"
 
-exit 0
 # Create the CloudFormation stack
 echo "Creating CloudFormation stack: $STACK_NAME..."
 aws cloudformation create-stack --stack-name $STACK_NAME --template-body file://$TEMPLATE_FILE --capabilities CAPABILITY_NAMED_IAM
