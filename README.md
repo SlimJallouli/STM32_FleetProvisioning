@@ -200,7 +200,7 @@ conf set thing_group_name <Your ThingGroupName>
 conf commit
 reset
 ```
-### 6.2 Automated auption
+### 6.2 Automated Option
 #### 6.2.1 Update the config.json file
 Open the config.json file and update the follwing
 
