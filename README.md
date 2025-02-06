@@ -213,5 +213,5 @@ Open the config.json file and update the follwing
   * "thing_group_name": "MyThingGroup",
   * "portName": "MyBoardComPort",
 
-  #### 6.2.2run the config script
-  Dependong on you operating systrem, run config.ps1 on windows, config.sh on Linux
+  #### 6.2.2 Run the config script
+  Dependong on you operating systrem, run `config.ps1` on windows, `config.sh` on Linux
