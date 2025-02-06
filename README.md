@@ -130,7 +130,27 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 
 ![alt text](<Screenshot 2025-02-05 093504.png>)
 
-### 5.6. Upload the certificate to STM32 
+## 6 Configure your boards
+To ensure the board properly connects to AWS, provision your board and start the application by following these steps:
+
+ 1. - Send the claim certificate.
+ 2. - Send the claim private key.
+ 3. - Set the AWS endpoint.
+ 4. - Set the MQTT port.
+ 5. - Set the Thing Group Name.
+ 6. - Set the Wi-Fi SSID.
+ 7. - Set the Wi-Fi password.
+ 8. - Set the provision state.
+ 9. - Commit the changes.
+ 10. - Reset the board.
+
+You have two options to configure your board:
+
+1. - Manual Option: Manually send each command through a serial terminal.
+2. - Automated Option: Use the provided configuration script to automate the process.
+
+### 6.1 Manual option
+#### 6.1.1. Upload the certificate to STM32 
 - open `claim-certs\claim.pem.crt` on text editor
 
 - construct the command as following and then use serial terminal to send it to STM32
@@ -146,7 +166,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END CERTIFICATE-----
 ```
-### 5.7. Upload the private key to STM32
+#### 6.1.2. Upload the private key to STM32
 - open `claim-certs\private-key.pem` on text editor
 
 - construct the command as following and then use serial terminal to send it to STM32
@@ -158,7 +178,7 @@ AwXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4r
 3CSXXXXXXXXXXXXXXXXXiUQ==
 -----END EC PRIVATE KEY-----
 ```
-### 5.8. Set Config
+#### 6.1.3. Set Config
 - Use a serial terminal to:
    * Set Wi-Fi SSID
    * Set Wi-Fi Password
@@ -180,3 +200,18 @@ conf set thing_group_name <Your ThingGroupName>
 conf commit
 reset
 ```
+### 6.2 Automated auption
+#### 6.2.1 Update the config.json file
+Open the config.json file and update the follwing
+
+  * "ThingGroupName": "STM32U5_ThingGroup",
+  * "mqtt_endpoint": "abcdefjhtvew8t-ats.iot.us-west-2.amazonaws.com",
+  * "mqtt_port": 8883,
+  * "provision_state": 0,
+  * "wifi_ssid": "MySSID",
+  * "wifi_credential": "MyPSW",
+  * "thing_group_name": "MyThingGroup",
+  * "portName": "MyBoardComPort",
+
+  #### 6.2.2run the config script
+  Dependong on you operating systrem, run config.ps1 on windows, config.sh on Linux
