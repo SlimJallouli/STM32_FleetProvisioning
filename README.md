@@ -36,6 +36,7 @@ The User will need to:
 6. Use a serial terminal to:
    * Upload the Fleet Provisioning private key
    * Upload the Fleet Provisioning certificate
+   * Upload AWS RootCA certificate
    * Set Wi-Fi SSID
    * Set Wi-Fi Password
    * Set AWS endpoint
@@ -135,14 +136,15 @@ To ensure the board properly connects to AWS, provision your board and start the
 
  1. - Send the claim certificate.
  2. - Send the claim private key.
- 3. - Set the AWS endpoint.
- 4. - Set the MQTT port.
- 5. - Set the Thing Group Name.
- 6. - Set the Wi-Fi SSID.
- 7. - Set the Wi-Fi password.
- 8. - Set the provision state.
- 9. - Commit the changes.
- 10. - Reset the board.
+ 3. - Send AWS RootCA.
+ 4. - Set the AWS endpoint.
+ 5. - Set the MQTT port.
+ 6. - Set the Thing Group Name.
+ 7. - Set the Wi-Fi SSID.
+ 8. - Set the Wi-Fi password.
+ 9. - Set the provision state.
+ 10. - Commit the changes.
+ 11. - Reset the board.
 
 You have two options to configure your board:
 
@@ -178,7 +180,31 @@ AwXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4r
 3CSXXXXXXXXXXXXXXXXXiUQ==
 -----END EC PRIVATE KEY-----
 ```
-#### 6.1.3. Set Config
+
+#### 6.1.3. Import the Amazon Root CA Certificate
+Use the *pki import cert root_ca_cert* command to import the Root CA Certificate.
+For this demo, we recommend you use the ["Starfield Services Root Certificate Authority - G2](https://www.amazontrust.com/repository/SFSRootCAG2.pem) Root CA Certificate which has signed all four available Amazon Trust Services Root CA certificates.
+
+Copy/Paste the contents of [SFSRootCAG2.pem](https://www.amazontrust.com/repository/SFSRootCAG2.pem) into your serial terminal after issuing the ```pki import cert``` command.
+```
+> pki import cert root_ca_cert
+-----BEGIN CERTIFICATE-----
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+-----END CERTIFICATE-----
+```
+
+#### 6.1.4. Set Config
 - Use a serial terminal to:
    * Set Wi-Fi SSID
    * Set Wi-Fi Password
