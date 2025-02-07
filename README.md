@@ -16,7 +16,7 @@ This is an adaptation of the FreeRTOS [AWS IoT Fleet Provisioning Demo
 
 The main differences vs the [AWS IoT Fleet Provisioning Demo
 ](https://www.freertos.org/Documentation/03-Libraries/04-AWS-libraries/06-AWS-IoT-Fleet-Provisioning/03-Fleet-provisioning-demo):
-- It runs on STM32
+- It runs on STM32 and on top of the AWS [iot-reference-stm32u5](https://github.com/FreeRTOS/iot-reference-stm32u5)
 - Automate the process using scripts and CloudFormation to create the required AWS resources. This significantly reduces time and minimizes errors.
 - Devices are automatically register to a ThingGroup in AWS
 

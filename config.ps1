@@ -15,7 +15,7 @@ function Send-Command {
         [string]$command
     )
     $serialPort.WriteLine($command)
-    Start-Sleep 1
+    Start-Sleep -Milliseconds 100
 }
 
 # Function to send file content over the serial port
@@ -25,7 +25,7 @@ function Send-FileContent {
     )
     $content = Get-Content -Raw -Path $filePath
     $serialPort.WriteLine($content)
-    Start-Sleep 3
+    Start-Sleep -Milliseconds 500
 }
 
 # Send the specified commands from the JSON configuration
@@ -45,22 +45,22 @@ Write-Host "Setting wifi_credential $($config.wifi_credential)"
 Send-Command "conf set wifi_credential $($config.wifi_credential)"
 
 Write-Host "Setting thing_group_name $($config.thing_group_name)"
-Send-Command "conf set thing_group_name $($config.thing_group_name)"
-
-Write-Host "Setting certificateFile"
-Send-Command "pki import cert fleetprov_claim_cert"
-Send-FileContent $config.certificateFile
-
-Write-Host "Setting privateKeyFile"
-Send-Command "pki import key fleetprov_claim_key"
-Send-FileContent $config.privateKeyFile
-
-Write-Host "Setting root_ca_cert"
-Send-Command "pki import cert root_ca_cert"
-Send-FileContent $config.root_ca_cert
+Send-Command "conf set group_name $($config.thing_group_name)"
 
 Write-Host "commit"
 Send-Command "conf commit"
+
+Write-Host "Setting Claim certificate"
+Send-Command "pki import cert fleetprov_claim_cert"
+Send-FileContent $config.certificateFile
+
+Write-Host "Setting Claim private Key"
+Send-Command "pki import key fleetprov_claim_key"
+Send-FileContent $config.privateKeyFile
+
+Write-Host "Setting AWS Root CA"
+Send-Command "pki import cert root_ca_cert"
+Send-FileContent $config.root_ca_cert
 
 Write-Host "reset"
 Send-Command "reset"

@@ -27,7 +27,6 @@ CSR_FILE="$CERT_DIR/csr.pem"
 
 # Read provisioningTemplateName from config.json
 STACK_NAME=$(grep -oP '(?<="StackName": ")[^"]*' "$CONFIG_FILE")
-GROUP_NAME=$(grep -oP '(?<="ThingGroupName": ")[^"]*' "$CONFIG_FILE")
 PROVISION_TEMPLATE_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
 
 if [ -z "$STACK_NAME" ]; then
