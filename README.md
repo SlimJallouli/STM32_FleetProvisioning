@@ -88,7 +88,7 @@ Description of the files on this repository
 Clone these two repositories:
 
 ```bash
-git clone https://github.com/SlimJallouli/aware_demo.git --recurse-submodules
+git clone https://github.com/SlimJallouli/b_u585_iota02_aws_iot.git --recurse-submodules
 ```
 ```bash
 git clone https://github.com/SlimJallouli/STM32_FleetProvisioning
