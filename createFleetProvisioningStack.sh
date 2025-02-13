@@ -28,6 +28,7 @@ CSR_FILE="$CERT_DIR/csr.pem"
 # Read provisioningTemplateName from config.json
 STACK_NAME=$(grep -oP '(?<="StackName": ")[^"]*' "$CONFIG_FILE")
 PROVISION_TEMPLATE_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
+THING_GROUP_NAME=$(grep -oP '(?<="thing_group_name": ")[^"]*' "$CONFIG_FILE")
 
 if [ -z "$STACK_NAME" ]; then
     echo "Error: provisioningTemplateName not found in $CONFIG_FILE"
@@ -35,11 +36,14 @@ if [ -z "$STACK_NAME" ]; then
 fi
 
 echo "Using STACK_NAME: $STACK_NAME"
+echo "Thing Group Name: $THING_GROUP_NAME"
 
 # Check that the stack name argument is provided
 if [ -z "$STACK_NAME" ]; then
     usage
 fi
+
+aws iot create-thing-group  --thing-group-name "$THING_GROUP_NAME"
 
 # Update the Default value in template.yaml
 TEMPLATE_FILE="template.yaml"
