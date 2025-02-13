@@ -42,23 +42,41 @@ send_file_content() {
 }
 
 # Send the specified commands from the JSON configuration
+echo "conf set mqtt_endpoint $mqtt_endpoint"
 send_command "conf set mqtt_endpoint $mqtt_endpoint"
+
+echo  "conf set mqtt_port $mqtt_port"
 send_command "conf set mqtt_port $mqtt_port"
+
+echo  "conf set provision_state $provision_state"
 send_command "conf set provision_state $provision_state"
+
+echo  "conf set wifi_ssid $wifi_ssid"
 send_command "conf set wifi_ssid $wifi_ssid"
+
+echo  "conf set wifi_credential $wifi_credential"
 send_command "conf set wifi_credential $wifi_credential"
+
+echo  "conf set thing_group_name $thing_group_name"
 send_command "conf set thing_group_name $thing_group_name"
 
+# Commit the configuration
+echo "conf commit"
+send_command "conf commit"
+
 # Import certificates and keys
+echo "pki import cert fleetprov_claim_cert"
 send_command "pki import cert fleetprov_claim_cert"
 send_file_content "$certificateFile"
 
+echo "pki import key fleetprov_claim_key"
 send_command "pki import key fleetprov_claim_key"
 send_file_content "$privateKeyFile"
 
+echo "pki import cert root_ca_cert" 
 send_command "pki import cert root_ca_cert"
 send_file_content "$rootCa"
 
-# Commit the configuration and reset
-send_command "conf commit"
+# Reset the device to apply the configuration
+echo "reset"
 send_command "reset"
