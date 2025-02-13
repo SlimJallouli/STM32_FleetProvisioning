@@ -124,12 +124,17 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 ./createFleetProvisioningStack.sh
 ```
 ### 5.5. Rebuild the project
-- open the `aware_demo` with STM32CubeIDE
+- open the `b_u585_iota02_aws_iot` project with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
 - replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name as you set it up in `config.json` file. This is important or your device will not be able to register itself with AWS.
-- rebuild, flash and run the project
 
 ![alt text](<Screenshot 2025-02-05 093504.png>)
+
+- Make sure to select the FleetProvisioning option
+
+![alt text](<Screenshot 2025-02-13 143120-1.png>)
+
+- rebuild, flash and run the project
 
 ## 6 Configure your boards
 To ensure the board properly connects to AWS, provision your board and start the application by following these steps:
