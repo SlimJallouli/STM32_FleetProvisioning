@@ -132,7 +132,7 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 
 - Make sure to select the FleetProvisioning option
 
-![alt text](<Screenshot 2025-02-13 143120-1.png>)
+![alt text](<Screenshot 2025-02-13 143120.png>)
 
 - rebuild, flash and run the project
 
