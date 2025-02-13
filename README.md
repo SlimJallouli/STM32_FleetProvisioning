@@ -137,17 +137,17 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 - rebuild, flash and run the project
 
 ## 6 Configure your boards
-To ensure the board properly connects to AWS, provision your board and start the application by following these steps:
+To ensure your STM32 board properly connects to AWS, you must configure your board by sending the following over UART using AWS CLI commands:
 
- 1. - Send the claim certificate.
- 2. - Send the claim private key.
- 3. - Send AWS RootCA.
- 4. - Set the AWS endpoint.
- 5. - Set the MQTT port.
- 6. - Set the Thing Group Name.
- 7. - Set the Wi-Fi SSID.
- 8. - Set the Wi-Fi password.
- 9. - Set the provision state.
+ 1. - Claim certificate.
+ 2. - Claim private key.
+ 3. - AWS RootCA.
+ 4. - AWS endpoint.
+ 5. - MQTT port.
+ 6. - Thing Group Name.
+ 7. - Wi-Fi SSID.
+ 8. - Wi-Fi password.
+ 9. - provision state.
  10. - Commit the changes.
  11. - Reset the board.
 
@@ -157,7 +157,7 @@ You have two options to configure your board:
 2. - Automated Option: Use the provided configuration script to automate the process.
 
 ### 6.1 Manual option
-#### 6.1.1. Upload the certificate to STM32 
+#### 6.1.1. Upload the claim certificate to STM32 
 - open `claim-certs\claim.pem.crt` on text editor
 
 - construct the command as following and then use serial terminal to send it to STM32
@@ -173,7 +173,7 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 PFSoDLLTuqihG33SKAGGJVdARcCAQNYgycVe6ZpPLVzR+feZu3G5Vg==
 -----END CERTIFICATE-----
 ```
-#### 6.1.2. Upload the private key to STM32
+#### 6.1.2. Upload the claim private key to STM32
 - open `claim-certs\private-key.pem` on text editor
 
 - construct the command as following and then use serial terminal to send it to STM32
@@ -233,16 +233,19 @@ reset
 ```
 ### 6.2 Automated Option
 #### 6.2.1 Update the config.json file
-Open the config.json file and update the follwing
+Open the `config.json` file and update the follwing
 
-  * "ThingGroupName": "STM32U5_ThingGroup",
   * "mqtt_endpoint": "abcdefjhtvew8t-ats.iot.us-west-2.amazonaws.com",
   * "mqtt_port": 8883,
   * "provision_state": 0,
   * "wifi_ssid": "MySSID",
-  * "wifi_credential": "MyPSW",
+  * "wifi_credential": "MyPSWD",
   * "thing_group_name": "MyThingGroup",
   * "portName": "MyBoardComPort",
+  * Update the `certificateFile`, `privateKeyFile` and `root_ca_cert` paths depending on your OS (Default Windows)
+
+![alt text](<Screenshot 2025-02-13 145343.png>)
+
 
   #### 6.2.2 Run the config script
   Dependong on you operating systrem, run `config.ps1` on windows, `config.sh` on Linux
