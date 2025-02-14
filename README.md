@@ -112,6 +112,7 @@ open `config.json` with a text editor and update:
 - StackName
 - ThingGroupName
 - provisioningTemplate
+>NOTE: Set the `provisioningTemplateName` to `DEFULT_FP_TemplateName` to use the provided `b_u585_iota02_aws_iot.hex`
 
 ### 5.4. Create the CloudFormation Stack
 Use `createFleetProvisioningStack.sh` to automte the setup of AWS IoT Fleet Provisioning by creating a CloudFormation stack, generating claim certificates, and attaching the necessary IoT policies.
@@ -123,7 +124,16 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 ```bash
 ./createFleetProvisioningStack.sh
 ```
-### 5.5. Rebuild the project
+
+### 5.5 Flash the b_u585_iota02_aws_iot.hex
+
+You can use the `b_u585_iota02_aws_iot.hex` if the `provisioningTemplateName` was set to `DEFULT_FP_TemplateName` when you created the Fleet Provisionin template earlier. You can use [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html) to flash your device
+
+You need to rebuild the poject if the `provisioningTemplateName` is different from `DEFULT_FP_TemplateName`
+
+### 5.6. Rebuild the project
+If `provisioningTemplateName` is different from `DEFULT_FP_TemplateName` then you need to rebuild the project
+
 - open the `b_u585_iota02_aws_iot` project with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
 - replace the ***#define democonfigPROVISIONING_TEMPLATE_NAME "ProvisionTemplate"*** with your provision template name as you set it up in `config.json` file. This is important or your device will not be able to register itself with AWS.
