@@ -25,6 +25,16 @@ CERT_DIR="claim-certs"
 CERT_PEM_OUTFILE="$CERT_DIR/claim.pem.crt"
 CSR_FILE="$CERT_DIR/csr.pem"
 
+# Create the directory if it doesn't exist
+mkdir -p "$CERT_DIR"
+
+# URL to download the certificate
+AWS_CA_CERT_URL="https://www.amazontrust.com/repository/SFSRootCAG2.pem"
+
+# Download the certificate and save it to the specified directory
+curl -o "$CERT_DIR/SFSRootCAG2.pem" "$AWS_CA_CERT_URL"
+echo "AWS CA Certificate downloaded and saved to $CERT_DIR/SFSRootCAG2.pem"
+
 # Read provisioningTemplateName from config.json
 STACK_NAME=$(grep -oP '(?<="StackName": ")[^"]*' "$CONFIG_FILE")
 PROVISION_TEMPLATE_NAME=$(grep -oP '(?<="provisioningTemplateName": ")[^"]*' "$CONFIG_FILE")
