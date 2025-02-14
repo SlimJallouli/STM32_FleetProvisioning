@@ -85,11 +85,7 @@ Description of the files on this repository
 ## 5. Setup Steps
 
 ### 5.1. Clone the Repositories
-Clone these two repositories:
 
-```bash
-git clone https://github.com/SlimJallouli/b_u585_iota02_aws_iot.git --recurse-submodules
-```
 ```bash
 git clone https://github.com/SlimJallouli/STM32_FleetProvisioning
 ```
@@ -125,14 +121,23 @@ The claim certificate is saved at `claim-certs\claim.pem.crt`
 ./createFleetProvisioningStack.sh
 ```
 
-### 5.5 Flash the b_u585_iota02_aws_iot.hex
+### 5.5 Flash the b_u585_iota02_aws_iot.bin
 
-You can use the `b_u585_iota02_aws_iot.hex` if the `provisioningTemplateName` was set to `DEFULT_FP_TemplateName` when you created the Fleet Provisionin template earlier. You can use [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html) to flash your device
+You can use the `b_u585_iota02_aws_iot.bin` if the `provisioningTemplateName` was set to `DEFULT_FP_TemplateName` when you created the Fleet Provisionin template earlier. You can drag and drop the file to your **[B-U585I-IOT02A](https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html)**
+
+![alt text](<Screenshot 2025-02-14 081745-1.png>)
+
 
 You need to rebuild the poject if the `provisioningTemplateName` is different from `DEFULT_FP_TemplateName`
 
 ### 5.6. Rebuild the project
 If `provisioningTemplateName` is different from `DEFULT_FP_TemplateName` then you need to rebuild the project
+
+clone the b_u585_iota02_aws_iot repo
+
+```bash
+git clone https://github.com/SlimJallouli/b_u585_iota02_aws_iot.git --recurse-submodules
+```
 
 - open the `b_u585_iota02_aws_iot` project with STM32CubeIDE
 - open `\Common\app\FleetProvisioning\fleet_provisioning_config.h` 
