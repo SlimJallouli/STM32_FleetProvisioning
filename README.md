@@ -90,7 +90,7 @@ Description of the files on this repository
 ### 5.1. Clone the Repositories
 
 ```bash
-git clone https://github.com/SlimJallouli/STM32_FleetProvisioning
+git clone https://github.com/stm32-hotspot/STM32_FleetProvisioning
 ```
 
 ### 5.2. Generate a CSR
@@ -139,7 +139,7 @@ If `provisioningTemplateName` is different from `DEFULT_FP_TemplateName` then yo
 clone the b_u585_iota02_aws_iot repo
 
 ```bash
-git clone https://github.com/SlimJallouli/b_u585_iota02_aws_iot.git --recurse-submodules
+git clone https://github.com/stm32-hotspot/b_u585_iota02_aws_iot.git --recurse-submodules
 ```
 
 - open the `b_u585_iota02_aws_iot` project with STM32CubeIDE
